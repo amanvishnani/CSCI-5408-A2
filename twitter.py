@@ -42,9 +42,10 @@ def storeTweetToMongo(collection):
         since_id = recentRcd["id"]
 
     for keyword in keywords:
+        print(keyword)
         for tweet in limit_handled(tweepy.Cursor(api.search, q=keyword, tweet_mode='extended', since_id=since_id).items(600)):
             if tweet is None:
-                return
+                break
             mongo_obj = collection.insert_one(tweet._json)
             print(mongo_obj.inserted_id)
 
@@ -54,8 +55,15 @@ def cleanTweets(collection):
     for tweet in collection.find({'cleanText': None}):
         full_text = tweet['full_text']
         full_text = re.sub(url_regex, '', full_text) # Remove URL
-        full_text = re.sub(r'[^A-Za-z0-9 @]+', '', full_text)  # Special Characters
+        full_text = re.sub(r'[^A-Za-z0-9 @]+', ' ', full_text)  # Special Characters
         full_text = re.sub(r"\s{2,}", ' ', full_text) # Remove Extra Spaces
         full_text = full_text.strip()
         updated_tweet = collection.find_one_and_update({'_id': tweet['_id']}, {'$set': {'cleanText': full_text}})
     print("************* [DONE] Cleaning Twitter Data **************")
+
+
+def getAllTweets(collection):
+    tweets = []
+    for tweet in collection.find({}):
+        tweets.append(tweet['cleanText'])
+    return tweets

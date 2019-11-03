@@ -30,3 +30,10 @@ def cleanNews(collection):
         full_text = full_text.strip()
         updated_news = collection.find_one_and_update({'_id': news['_id']}, {'$set': {'cleanText': full_text}})
     print("************* [DONE] Cleaning News Data **************")
+
+
+def getAllNews(collection):
+    news = []
+    for item in collection.find({}):
+        news.append(item['cleanText']);
+    return news

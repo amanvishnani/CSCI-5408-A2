@@ -1,6 +1,7 @@
 from config import *
 import time
 import tweepy
+import re
 
 tweepy.debug(debug_tweepy)
 
@@ -46,3 +47,15 @@ def storeTweetToMongo(collection):
                 return
             mongo_obj = collection.insert_one(tweet._json)
             print(mongo_obj.inserted_id)
+
+
+def cleanTweets(collection):
+    print("************* Cleaning Twitter Data **************")
+    for tweet in collection.find({'cleanText': None}):
+        full_text = tweet['full_text']
+        full_text = re.sub(url_regex, '', full_text) # Remove URL
+        full_text = re.sub(r'[^A-Za-z0-9 @]+', '', full_text)  # Special Characters
+        full_text = re.sub(r"\s{2,}", ' ', full_text) # Remove Extra Spaces
+        full_text = full_text.strip()
+        updated_tweet = collection.find_one_and_update({'_id': tweet['_id']}, {'$set': {'cleanText': full_text}})
+    print("************* [DONE] Cleaning Twitter Data **************")

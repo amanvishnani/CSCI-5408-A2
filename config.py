@@ -3,6 +3,7 @@ from pymongo import MongoClient
 # ###### UPDATE YOUR API AND CONFIG DETAILS BELOW #####
 debug_tweepy = True
 keywords = ['canada', 'halifax', 'university', '"dalhousie university"', '"canada education"']
+url_regex = r'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]+\.[a-zA-Z0-9()]+\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)'
 
 mongo_url = 'mongodb://localhost:27017/'
 mongo_db_name = 'assignment2'

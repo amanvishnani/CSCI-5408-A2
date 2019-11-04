@@ -18,3 +18,4 @@ words = sentences.flatMap(lambda line: line.lower().split(" "))
 
 filtered_word = words.filter(lambda word: word in keywords)
 filtered_word_count = filtered_word.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
+filtered_word_count.collect()

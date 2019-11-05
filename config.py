@@ -11,12 +11,12 @@ mongo_db_name = 'assignment2'
 mongo_twitter_collection = 'twitter_collection'
 mongo_news_api_collection = 'news_api_collection'
 
-consumer_key = 'iPsQb6EL9hSgFtPMplKo4GF5I'
-consumer_secret = 'ivk3BAAttMufD3LjNCXdZgK7SYtAG9wKXcswm0Sw6v6e1aIN0h'
-access_token = '232136758-uXFtOA52lkZ5tw2wCg2f349wOPw4OQPnnKe2ABUr'
-access_token_secret = 'NiRXcIxYvKnhDFSYeXeAkW6BVRmOKITmPYHMln9iGXeYz'
+consumer_key = 'XXX'
+consumer_secret = 'XXX'
+access_token = 'XXX'
+access_token_secret = 'XXX'
 
-news_api_key="9a32723dc1694eacb4a47b9f5298e3b1"
+news_api_key="XXX"
 
 # ##########################################
 
